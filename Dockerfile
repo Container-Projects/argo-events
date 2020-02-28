@@ -1,10 +1,11 @@
 FROM golang:1.12-stretch
 
-RUN apt-get install -y ca-certificates
-
 RUN apt-get update \
+ && apt-get --no-install-recommends install -y ca-certificates \
  && apt-get upgrade -y \
- && apt-get install -y git
+ && apt-get --no-install-recommends install -y git \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 RUN curl -kLo /usr/local/bin/dep \
